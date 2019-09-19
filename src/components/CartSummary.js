@@ -7,7 +7,7 @@ const CartSummary = () => (
       <div className="cart--summary">
         <h2>Summary</h2>
         <div>Subtotal: ${subtotal.toFixed(2)}</div>
-        <div>Shipping: ${shipping.toFixed(2)}</div>
+        <div>Shipping: ${(subtotal !== 0 ? shipping.toFixed(2): 0.00.toFixed(2))}</div>
         <hr />
         <div>Total: ${total.toFixed(2)}</div>
       </div>

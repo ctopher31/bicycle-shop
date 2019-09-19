@@ -1,11 +1,10 @@
 import React, { Component, createContext } from 'react';
-import products from '../data/data';
+import data from '../data/data';
 
 const AppContext = createContext({
   cart: [],
   subtotal: 0,
   total: 0,
-  shipping: 0,
   addItem: () => {},
   removeItem: () => {},
 });
@@ -19,7 +18,6 @@ export class AppProvider extends Component {
       cart: [],
       subtotal: 0,
       total: 0,
-      shipping: 0,
     };
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
@@ -27,16 +25,16 @@ export class AppProvider extends Component {
 
   addItem(key) {
     this.setState((prevState) => {
-      const cart = [ ...prevState.cart, { ...products.filter(item => item.number === key) }];
+      const cart = [...prevState.cart, ...data.products.filter(item => item.number === key)];
       const subtotal = cart.reduce((accum, item) => {
-        return accum += (item.qty * (item.onSale === true ? item.salePrice : item.price));
+        return accum += (item.onSale === true ? item.salePrice : item.price);
       }, 0);
       
       return {
         cart,
         subtotal,
-        total: (subtotal > 0 ? subtotal + prevState.shipping : 0),
-        shipping: (subtotal > 0 ? prevState.shipping : 0),
+        total: (subtotal > 0 ? subtotal + data.shipping : 0),
+        shipping: (subtotal > 0 ? data.shipping : 0),
       };
     });
   }
@@ -45,14 +43,14 @@ export class AppProvider extends Component {
     this.setState((prevState) => {
       const cart = prevState.cart.filter(item => item.number !== key);
       const subtotal = cart.reduce((accum, item) => {
-        return accum += (item.qty * (item.onSale === true ? item.salePrice : item.price));
+        return accum += (item.onSale === true ? item.salePrice : item.price);
       }, 0);
 
       return {
         cart,
         subtotal,
-        total: (subtotal > 0 ? subtotal + prevState.shipping : 0),
-        shipping: (subtotal > 0 ? prevState.shipping : 0),
+        total: (subtotal > 0 ? subtotal + data.shipping : 0),
+        shipping: (subtotal > 0 ? data.shipping : 0),
       };
     });
   }
@@ -64,7 +62,8 @@ export class AppProvider extends Component {
           ...this.state,
           addItem: this.addItem,
           removeItem: this.removeItem,
-          products: products,
+          products: data.products,
+          shipping: data.shipping,
         }}
       >
         {this.props.children}

@@ -1,17 +1,16 @@
 import React from 'react';
 import { AppConsumer } from '../providers/AppProvider';
 
-const LineItem = ({
+const Listing = ({
   number,
   name,
   price,
-  onSale,
   salePrice,
-  qty,
+  onSale,
 }) => (
   <AppConsumer>
-    {({ removeItem }) => (
-      <div className="lineitem--container">
+    {({ addItem }) => (
+      <div className="listing--container">
         <ul>
           <li>Number: {number}</li>
           <li>Name: {name}</li>
@@ -20,10 +19,10 @@ const LineItem = ({
           <li className={onSale === false ? 'hide' : 'on-sale'}>Sale Price: ${salePrice.toFixed(2)}</li>
           {/* <li>Quantity: {qty}</li> */}
         </ul>
-        <button onClick={() => removeItem(number)}>Remove Item</button>
+        <button onClick={() => addItem(number)}>Add to Cart</button>
       </div>
     )}
   </AppConsumer>
 );
 
-export default LineItem;
+export default Listing;
