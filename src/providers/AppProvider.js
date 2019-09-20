@@ -25,9 +25,21 @@ export class AppProvider extends Component {
 
   addItem(key) {
     this.setState((prevState) => {
-      const cart = [...prevState.cart, ...data.products.filter(item => item.number === key)];
+      let cart;
+
+      if (prevState.cart.filter(item => item.number === key).length === 1) {
+        cart = prevState.cart.map(item => {
+          if (item.number === key) {
+            item.qty += 1;
+          }
+          return item;
+        });
+      } else {
+        cart = [...prevState.cart, { ...data.products.filter(product => product.number === key)[0], qty: 1 }]
+      }
+
       const subtotal = cart.reduce((accum, item) => {
-        return accum += (item.onSale === true ? item.salePrice : item.price);
+        return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
       }, 0);
       
       return {
@@ -41,9 +53,19 @@ export class AppProvider extends Component {
 
   removeItem(key) {
     this.setState((prevState) => {
-      const cart = prevState.cart.filter(item => item.number !== key);
+      const cart = prevState.cart.reduce((accum, item) => {
+        if (item.number === key) {
+          if (item.qty > 1) {
+            item.qty -= 1;
+            return [...accum, item];
+          }
+          return [...accum];
+        }
+        return [...accum, item];
+      }, []);
+
       const subtotal = cart.reduce((accum, item) => {
-        return accum += (item.onSale === true ? item.salePrice : item.price);
+        return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
       }, 0);
 
       return {

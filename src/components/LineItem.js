@@ -18,7 +18,7 @@ const LineItem = ({
           <li>Price: ${price.toFixed(2)}</li>
           <li className={onSale === false ? 'hide' : 'on-sale'}>{onSale === false ? '' : 'On Sale'}</li>
           <li className={onSale === false ? 'hide' : 'on-sale'}>Sale Price: ${salePrice.toFixed(2)}</li>
-          {/* <li>Quantity: {qty}</li> */}
+          <li>Quantity: {qty}</li>
         </ul>
         <button onClick={() => removeItem(number)}>Remove Item</button>
       </div>
