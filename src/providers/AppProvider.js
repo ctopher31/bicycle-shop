@@ -3,6 +3,7 @@ import data from '../data/data';
 
 const AppContext = createContext({
   cart: [],
+  cartCount: 0,
   subtotal: 0,
   total: 0,
   addItem: () => {},
@@ -11,11 +12,12 @@ const AppContext = createContext({
 
 export const AppConsumer = AppContext.Consumer;
 
-export class AppProvider extends Component {
+class AppProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cart: [],
+      cartCount: 0,
       subtotal: 0,
       total: 0,
     };
@@ -41,9 +43,12 @@ export class AppProvider extends Component {
       const subtotal = cart.reduce((accum, item) => {
         return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
       }, 0);
-      
+
+      const cartCount = cart.reduce((accum, item) => (accum +=  item.qty), 0);
+
       return {
         cart,
+        cartCount,
         subtotal,
         total: (subtotal > 0 ? subtotal + data.shipping : 0),
         shipping: (subtotal > 0 ? data.shipping : 0),
@@ -68,8 +73,11 @@ export class AppProvider extends Component {
         return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
       }, 0);
 
+      const cartCount = (cart.length > 0 ? cart.reduce((accum, item) => (accum += item.qty), 0) : 0);
+
       return {
         cart,
+        cartCount,
         subtotal,
         total: (subtotal > 0 ? subtotal + data.shipping : 0),
         shipping: (subtotal > 0 ? data.shipping : 0),

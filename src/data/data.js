@@ -4,8 +4,8 @@ export default {
     {
       number: '51001',
       name: 'widget',
-      price: 35.00,
-      salePrice: 32.00,
+      price: 35.57,
+      salePrice: 32.95,
       onSale: true,
     },
     {
@@ -18,8 +18,8 @@ export default {
     {
       number: '51003',
       name: 'thing',
-      price: 24.00,
-      salePrice: 19.00,
+      price: 24.95,
+      salePrice: 19.95,
       onSale: true,
     }
   ]

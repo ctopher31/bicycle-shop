@@ -4,12 +4,9 @@ import { Link } from "react-router-dom";
 const Footer = () => (
   <footer className="footer">
     <nav>
-      <ul>
+      <ul className="nav--list footer-nav--list">
         <li>
-          <Link to="/">Shop</Link>
-        </li>
-        <li className="cart--link">
-          <Link to="/cart">Cart</Link>
+          <Link className="nav--link footer-nav--link" to="/">Products</Link>
         </li>
       </ul>
     </nav>

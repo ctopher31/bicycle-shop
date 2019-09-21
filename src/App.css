@@ -29,12 +29,40 @@ body {
   padding: 0 2rem;
 }
 
+.brand--container {
+  align-items: center;
+  display: flex;
+}
+
+.brand--logo {
+  margin-right: 1rem;
+  width: 4rem;
+}
+
+.brand--link {
+  color: #fff;
+  text-decoration: none;
+} 
+
 .footer {
   align-self: flex-end;
   background-color: #c9c9c9;
   display: flex;
   flex: none;
   width: 100%;
+}
+
+.nav--list {
+  list-style: none;
+}
+
+.nav--link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-nav--link {
+  color: #000;
 }
 
 .content {
