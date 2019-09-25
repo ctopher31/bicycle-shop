@@ -6,11 +6,11 @@ import { AppConsumer } from '../providers/AppProvider';
 
 const Cart = () => (
   <AppConsumer>
-    {({ cart }) => (
+    {({ cart, cartCount }) => (
       <main className="content cart">
         <h1 className="page--heading">
-          {cart.length > 0
-            ? `Your Cart has ${cart.length} Item${cart.length > 1 ? 's' : ''}`
+          {cartCount > 0
+            ? `Your Cart has ${cartCount} Item${cartCount > 1 ? 's' : ''}`
             : 'Your Cart is Empty'
           }
         </h1>

@@ -40,9 +40,7 @@ class AppProvider extends Component {
         cart = [...prevState.cart, { ...data.products.filter(product => product.number === key)[0], qty: 1 }]
       }
 
-      const subtotal = cart.reduce((accum, item) => {
-        return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
-      }, 0);
+      const subtotal = cart.reduce((accum, item) => (accum += item.qty * (item.onSale === true ? item.salePrice : item.price)), 0);
 
       const cartCount = cart.reduce((accum, item) => (accum +=  item.qty), 0);
 
@@ -69,9 +67,7 @@ class AppProvider extends Component {
         return [...accum, item];
       }, []);
 
-      const subtotal = cart.reduce((accum, item) => {
-        return accum += item.qty * (item.onSale === true ? item.salePrice : item.price);
-      }, 0);
+      const subtotal = cart.reduce((accum, item) => (accum += item.qty * (item.onSale === true ? item.salePrice : item.price)), 0);
 
       const cartCount = (cart.length > 0 ? cart.reduce((accum, item) => (accum += item.qty), 0) : 0);
 
